@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 from .models import Project
 from .serializers import ProjectSerializer
 
@@ -11,6 +11,9 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminOrReadOnly]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'description']
+    ordering_fields = ['deadline', 'created_at']
     
     def get_queryset(self):
         user = self.request.user

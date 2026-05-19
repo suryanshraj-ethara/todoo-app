@@ -21,6 +21,9 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip() for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(',')
+] + [
+    'https://web-production-a7f23.up.railway.app',
+    'https://*.up.railway.app'
 ]
 
 # Application definition
